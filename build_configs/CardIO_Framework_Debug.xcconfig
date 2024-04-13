@@ -8,8 +8,8 @@
 
 GCC_OPTIMIZATION_LEVEL = 0
 
-OTHER_CFLAGS[arch=armv7] = -mfloat-abi=softfp -mfpu=neon
-OTHER_CFLAGS[sdk=iphoneos*][arch=armv7s] = -mfloat-abi=softfp -mfpu=neon
+OTHER_CFLAGS[arch=arm64] = -mfloat-abi=softfp -mfpu=neon
+OTHER_CFLAGS[sdk=iphoneos*][arch=arm64] = -mfloat-abi=softfp -mfpu=neon
 
 GCC_SYMBOLS_PRIVATE_EXTERN = NO
 

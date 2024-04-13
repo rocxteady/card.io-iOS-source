@@ -128,8 +128,8 @@ def build(outdir=None, device_sdk=None, simulator_sdk=None, **kwargs):
     simulator_sdk = simulator_sdk or "iphonesimulator"
 
     arch_to_sdk = (
-                   ("i386", simulator_sdk),
-                   ("x86_64", simulator_sdk)
+                    ("x86_64", simulator_sdk),
+                    ("arm64", simulator_sdk),
                   )
 
     with settings(hide(*to_hide)):
@@ -195,8 +195,8 @@ def build(outdir=None, device_sdk=None, simulator_sdk=None, **kwargs):
                 # in Xcode 4.5 GM, xcrun selects the wrong lipo to use, so circumventing xcrun for now :(
                 lipo_cmd = "`xcode-select -print-path`/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo " \
                            "           {archive}/{libname}" \
-                           "           -arch i386 {i386}/{libname}" \
                            "           -arch x86_64 {x86_64}/{libname}" \
+                           "           -arch arm64 {arm64}/{libname}" \
                            "           -create" \
                            "           -output {universal}/{libname}".format(libname=env.libname, **arch_build_dirs)
                 local(lipo_cmd)

@@ -2308,7 +2308,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "if [ -z \"$ICC_VERSION\" ]\nthen\nICC_VERSION=`git describe --match=iOS_[0-9]*\\.[0-9]* --tags --always --dirty | sed \"s/iOS_//\" | sed \"s/-.*//\"`\nfi\necho \"Using version: $ICC_VERSION\"\n\nsed s/icc-version-undefined/$ICC_VERSION/g <Classes/CardIOIccVersion.h.template >Classes/CardIOIccVersion.h";
+			shellScript = "if [ -z \"$ICC_VERSION\" ]\nthen\nICC_VERSION=`git describe --match=iOS_[0-9]*\\.[0-9]* --tags --always --dirty | sed \"s/iOS_//\" | sed \"s/-.*//\"`\nfi\necho \"Using version: $ICC_VERSION\"\n\nsed s/icc-version-undefined/$ICC_VERSION/g <Classes/CardIOIccVersion.h.template >Classes/CardIOIccVersion.h\n";
 		};
 		3E9F4BDB181F03F300F33B48 /* Establish strings pre-commit script */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2322,7 +2322,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "export PATH=\"/usr/local/bin:$PATH\"\nif [ -d \".git\" ]; then\n  if [ ! -L \".git/hooks/pre-commit\" ]; then\n    echo \"Installing pre-commit hook for strings submodule\"\n    mkdir -p \".git/hooks\"\n    ln -s `pwd`/scripts/string_scripts/pre-commit.sh .git/hooks/pre-commit\n  fi\nfi";
+			shellScript = "export PATH=\"/usr/local/bin:$PATH\"\nif [ -d \".git\" ]; then\n  if [ ! -L \".git/hooks/pre-commit\" ]; then\n    echo \"Installing pre-commit hook for strings submodule\"\n    mkdir -p \".git/hooks\"\n    ln -s `pwd`/scripts/string_scripts/pre-commit.sh .git/hooks/pre-commit\n  fi\nfi\n";
 		};
 		3E9F4BDC181F03F300F33B48 /* Baler */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2336,7 +2336,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "export PATH=/usr/local/bin:$PATH\n\nif [ -f .baler_envx ]; then\n  source .baler_env 2 > /dev/null\nelif which bale > /dev/null; then\n echo \"Using default bale\"\nelse\n  echo \"baler is missing, so skipping the baler step\"\n  exit 0;\nfi\n\necho \"Baling bundle with `which bale`\"\nbale assets/ Classes/ --overwrite-delay 0 -z -c CardIOBundle || (echo 'Failed to generate bundle via baler!' ; exit 1)";
+			shellScript = "export PATH=/usr/local/bin:$PATH\n\nif [ -f .baler_envx ]; then\n  source .baler_env 2 > /dev/null\nelif which bale > /dev/null; then\n echo \"Using default bale\"\nelse\n  echo \"baler is missing, so skipping the baler step\"\n  exit 0;\nfi\n\necho \"Baling bundle with `which bale`\"\nbale assets/ Classes/ --overwrite-delay 0 -z -c CardIOBundle || (echo 'Failed to generate bundle via baler!' ; exit 1)\n";
 		};
 		929AD77D1B8C771200F6D18E /* Get version from git tag */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2350,7 +2350,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ -z \"$ICC_VERSION\" ]\nthen\nICC_VERSION=`git describe --match=iOS_[0-9]*\\.[0-9]* --tags --always --dirty | sed \"s/iOS_//\" | sed \"s/-.*//\"`\nfi\necho \"Using version: $ICC_VERSION\"\n\nsed s/icc-version-undefined/$ICC_VERSION/g <Classes/CardIOIccVersion.h.template >Classes/CardIOIccVersion.h";
+			shellScript = "if [ -z \"$ICC_VERSION\" ]\nthen\nICC_VERSION=`git describe --match=iOS_[0-9]*\\.[0-9]* --tags --always --dirty | sed \"s/iOS_//\" | sed \"s/-.*//\"`\nfi\necho \"Using version: $ICC_VERSION\"\n\nsed s/icc-version-undefined/$ICC_VERSION/g <Classes/CardIOIccVersion.h.template >Classes/CardIOIccVersion.h\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -2510,6 +2510,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A50A54BA1BE2F7A800B669FB /* UnitTest_Debug.xcconfig */;
 			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 			};
 			name = Debug;
 		};
@@ -2517,6 +2518,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A50A54BB1BE2F7A800B669FB /* UnitTest_Release.xcconfig */;
 			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 			};
 			name = Release;
 		};
@@ -2524,6 +2526,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A50A54B91BE2F7A800B669FB /* UnitTest_AdHoc.xcconfig */;
 			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 			};
 			name = AdHoc;
 		};
@@ -2539,6 +2542,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A50A54AF1BE2F7A800B669FB /* CardIO_Static_Library_Debug.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 			};
 			name = Debug;
 		};
@@ -2546,6 +2551,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A50A54B01BE2F7A800B669FB /* CardIO_Static_Library_Release.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 			};
 			name = Release;
 		};
@@ -2553,6 +2560,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A50A54AE1BE2F7A800B669FB /* CardIO_Static_Library_AdHoc.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 			};
 			name = AdHoc;
 		};
@@ -2560,6 +2569,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A553B71B1BE32664006DF551 /* icc_Static_Library_Debug.xcconfig */;
 			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 			};
 			name = Debug;
 		};
@@ -2567,6 +2577,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A553B71C1BE32664006DF551 /* icc_Static_Library_Release.xcconfig */;
 			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 			};
 			name = Release;
 		};
@@ -2574,6 +2585,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A553B71C1BE32664006DF551 /* icc_Static_Library_Release.xcconfig */;
 			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 			};
 			name = AdHoc;
 		};
@@ -2581,6 +2593,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A50A54BE1BE2FEEC00B669FB /* CardIO_Framework_Debug.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 			};
 			name = Debug;
 		};
@@ -2588,6 +2603,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A50A54BF1BE2FEEC00B669FB /* CardIO_Framework_Release.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 			};
 			name = Release;
 		};
@@ -2595,6 +2612,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A50A54BD1BE2FEEC00B669FB /* CardIO_Framework_Adhoc.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 			};
 			name = AdHoc;
 		};
@@ -2602,6 +2621,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A50A54B41BE2F7A800B669FB /* icc_Debug.xcconfig */;
 			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 			};
 			name = Debug;
 		};
@@ -2609,6 +2629,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A50A54B51BE2F7A800B669FB /* icc_Release.xcconfig */;
 			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 			};
 			name = Release;
 		};
@@ -2616,6 +2637,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A50A54B31BE2F7A800B669FB /* icc_AdHoc.xcconfig */;
 			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 			};
 			name = AdHoc;
 		};
